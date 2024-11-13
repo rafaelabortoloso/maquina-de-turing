@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Simulador de Máquina de Turing</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2,
+        h3 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            border: 1px solid #dcdcdc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #34495e;
+            color: #ffffff;
+        }
+
+        td {
+            background-color: #ecf0f1;
+        }
+
+        #steps {
+            margin-top: 20px;
+            white-space: pre;
+        }
+
+        .input-container {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .input-container input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .input-container button {
+            padding: 10px 15px;
+            background-color: #f39c12;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .input-container button:hover {
+            background-color: #f39c12;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .button-container button {
+            padding: 10px 15px;
+            margin: 5px;
+            background-color: #f39c12;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button-container button:hover {
+            background-color: #f39c12;
+        }
+
+        .highlight {
+            background-color: #f39c12;
+            color: #ffffff;
+        }
+
+        .disabled-button {
+            background-color: #d3d3d3;
+            color: #6c757d;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Máquina de Turing - Rafaela Bortoloso</h2>
+    <h3>L = {(a|b)* e a quantidade de a’s é igual a quantidade de b’s}</h3>
+
+    <div class="input-container">
+        <label for="entrada">Entrada:</label>
+        <input type="text" id="entrada" placeholder="Ex: ababba">
+        <button id="add-button">Inserir</button>
+    </div>
+
+    <table id="tape-container">
+        <tr id="tape-row">
+            <td>●</td>
+            <td>a</td>
+            <td>b</td>
+            <td>a</td>
+            <td>b</td>
+            <td>b</td>
+            <td>a</td>
+            <td>β</td>
+        </tr>
+    </table>
+
+    <div class="button-container">
+        <button id="execute-button">Executar</button>
+        <button id="previous-step-button">Passo Anterior</button>
+        <button id="next-step-button">Próximo Passo</button>
+    </div>
+
+    <table id="language-table">
+        <tr>
+            <th>δ</th>
+            <th>●</th>
+            <th>a</th>
+            <th>b</th>
+            <th>X</th>
+            <th>β</th>
+        </tr>
+        <tr>
+            <td>→q0</td>
+            <td>(q0, ●, D)</td>
+            <td>(q2, X, D)</td>
+            <td>(q1, X, D)</td>
+            <td>(q0, X, D)</td>
+            <td>(q4, β, D)</td>
+        </tr>
+        <tr>
+            <td>q1</td>
+            <td>-</td>
+            <td>(q3, X, E)</td>
+            <td>(q1, b, D)</td>
+            <td>(q1, X, D)</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>q2</td>
+            <td>-</td>
+            <td>(q2, a, D)</td>
+            <td>(q3, X, E)</td>
+            <td>(q2, X, D)</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>q3</td>
+            <td>-</td>
+            <td>(q3, a, E)</td>
+            <td>(q3, b, E)</td>
+            <td>(q0, X, D)</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>*q4</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+        </tr>
+    </table>
+
+    <h3>Passos Executados</h3>
+    <table id="steps-table">
+        <tr>
+            <th>Iteração</th>
+            <th>Estado Atual</th>
+            <th>Símbolo Lido</th>
+            <th>Próximo Estado</th>
+            <th>Símbolo Escrito</th>
+            <th>Direção</th>
+            <th>Posição do Cabeçote</th>
+        </tr>
+    </table>
+
+    <script src="index.js"></script>
+</body>
+
+</html>
