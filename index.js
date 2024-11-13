@@ -281,7 +281,6 @@ document.getElementById('execute-button').onclick = function () {
     currentHighlight = 0;
     currentState = 'q0';
     iteration = 1;
-    // backIteration = false;
 
     document.getElementById('steps-table').innerHTML = `
     <tr>
@@ -302,14 +301,12 @@ document.getElementById('execute-button').onclick = function () {
     const interval = setInterval(() => {
         const errorOccurred = !executeNextStep(true);
 
-        if (errorOccurred || currentState === 'q4') {
+        if (errorOccurred) {
             toggleStepButtons(false, true);
             addButton.disabled = false;
             addButton.classList.remove('disabled-button');
             clearInterval(interval);
-            if (currentState === 'q4') {
-                displayMessage(`Aceito em ${iteration} iterações!`, 'green');
-            }
+            displayMessage(`Aceito em ${iteration} iterações!`, 'green');
         }
     }, 900);
 };
