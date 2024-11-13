@@ -17,6 +17,11 @@ document.getElementById('add-button').onclick = function () {
         tapeRow.insertCell(0).textContent = '●';
 
         toggleStepButtons(true, true);
+        currentIndex = 0;
+        currentState = 'q0';
+        iteration = 1;
+        stepsHistory = [];
+        currentHighlight = 0;
 
         for (var i = 0; i < entrada.length; i++) {
             tapeRow.insertCell(i + 1).textContent = entrada[i];
